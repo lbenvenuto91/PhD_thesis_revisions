@@ -1,0 +1,107 @@
+%\chapter[State of art]{\begin {Huge}\textit{\bf{State of art}} \end{Huge}}
+
+\chapter[Introduction]{\centering \begin{normalsize} \begin{Huge}
+			Introduction
+		\end{Huge} \end{normalsize}}
+\label{ch:intro}
+\section{Background and Motivations}
+%Motivations and a concise description of the goals of the thesis
+Global Navigation Satellite System (GNSS) refers to a constellation of satellites that broadcast their positioning and timing data to GNSS receivers. The most famous GNSS is NAVSTAR GPS  installed by the U.S. Department of Defense in the '70s. A receiver estimates the time it takes for each signal to travel from the GNSS satellite antenna to the user's antenna. The receiver can then use four satellite data to determine its location. 
+
+Modern smartphones are equipped with GNSS receivers, e.g. to receive GPS data. Cellular location, provided by phone carriers, can assist the satellite-based location process (Assisted GPS). Indeed, software on smartphones feed raw cellular location data to the GPS receiver, which periodically switches between GPS data and cellular location to get a very close approximation in real-time. Internet routing data can also be used as additional location data. 
+
+In May 2016, during the ``Google I/O” conference, Google released an Application Programming Interface (API) to give Android developers access to GNSS raw measurements such as carrier phase, code measurements and navigation messages. 
+As stated in the white paper \cite{GSA_wp:2016} of the GNSS Raw
+Measurement Task Force, coordinated by the European GNSS Agency (GSA), this new feature of the Android API 
+offered new research directions and, more in general, new opportunities.  
+In particular, GNSS raw measurements can be used to optimise  multi-GNSS and multi-frequency solutions, to select the satellites based on their performance,  to transfer processing techniques from GNSS receivers to smartphones, to combine GNSS raw data with data of other sensors that are available in smartphone and to enable testing and post-processing analysis.
+
+From a technical point of view, the use of GNSS raw measurements posed several challenges for both GNSS experts and Android developers.
+Indeed, on one hand GNSS standard formats, such as RINEX or NMEA, are not natively available on the Android platform. On the other hand Mobile app developers are in general not familiar with the complex algorithms and libraries used in GNSS positioning.
+
+The GSA white paper \cite{GSA_wp:2016} addressed the gap between the two fields providing useful information, e.g. for deriving the pseudoranges from Android. 
+This important work opened a new research field aimed at developing low-cost applications for satellite-based positioning systems. 
+In particular, after its publication many authors started to analyse the quality of the raw measurements retrieved from smartphones and compare them with other types of low cost devices. The main detected issues turned out to be the high noise of the GNSS observables. Indeed, smartphones are equipped with cellphone-grade GNSS chipsets and antennas, which have on average very low gain resulting in low and irregular Signal to Noise Ratio (SNR) \cite{Zangenehnejad:2021}. For this reason smartphone positioning is very challenging, especially in harsh environments such as urban areas that are more vulnerable to the multipath and other interferences \cite{Angrisano:2022}.
+
+Nowadays raw GNSS measurements support is mandatory on devices that run Android 10 (API level 29) or higher, but unfortunately the support for some raw GNSS measurement fields (e.g. pseudorange rate, ADR, AGC) is optional and can vary based on the type of GNSS chipset installed on the device. Furthermore, not all the smartphones present on the market support double frequency or multi-constellation.
+For this reason, finding a robust use of GNSS raw measurements is still a topic of interest for the research communities working on GNSS and mobile computing.
+%
+%\section{Overview of the State of the Art}
+%Existing works (or Background)}
+The possibility to access GNSS raw measurements from Android  has changed the concept of precise positioning with portable devices. Several studies have been conducted to verify the feasibility \cite{Humphreys:2016} and positioning accuracy \cite{Pesyna2014, Zhang:2018} of smartphones for different purposes, from urban \cite{Masiero2014, adjrad2018} to pedestrian positioning applications
+\cite{presti2017, Fissore2018}, always facing problems related to the use of the Google API and to the filtered measurements provided by the GNSS chipset.
+In \cite{realini2017}, the authors demonstrated that it is possible to reach a decimeter level of accuracy
+in terms of positioning performances following the post-processing approach, made by
+double differencing raw smartphone observations. Meanwhile, the authors of \cite{Dabove2019b} first focused
+their attention on single-base RTK positioning and then demonstrated the possibility
+of obtaining a centimeter-level accuracy through the use of NRTK corrections \cite{Dabove:2019}.
+%
+Concerning  apps that can be used for logging GNSS raw data, 
+in 2016 Google released the open source GnssLogger to record measurements in csv format.
+Other apps such as  Geo++ RINEX Logger,  RinexON, GalileoPVT, and GNSS/IMU Android Logger can produce  GNSS raw measurements and sensor data in different standard formats including the 
+RINEX format.
+%Differently, from the above mentioned applications, our Android app  can be viewed as the edge component for our RTK-based processing system.
+%Indeed, we have defined an ad hoc format for the raw measurement 
+%in which the entire set of observables of an entire epoch is packaged in a single message and sent to the multipath mitigation procedure. Porting 
+%our extension of RTKLib to Android is a possible future direction to explore in the style of  recent projects such as RTKLibDroid and RtkGps.
+
+ Concerning the hardware, early smartphones only provided single-frequency and mostly GPS-only observations. In 2017, the Samsung S8 and Huawei P10 smartphones were released as the first multi-GNSS devices which are able to track carrier-phase measurements. However, in May 2018, the Xiaomi Mi 8 equipped with the new Broadcom BCM47755 GNSS chipset was released as the world’s first dual-frequency GNSS smartphone, i.e. added with L5 for GPS and E5a for Galileo \cite{Zangenehnejad:2021}. It can be also regarded as a great millstone in smartphone positioning as it provides the users with an opportunity to make ionospheric-free linear combination between observations of two frequencies to eliminate the ionosphere effect.
+
+ In \cite{Robustelli:2019} authors conducted some positioning tests using the Xiaomi Mi8 devices in different multipath conditions showing that the positioning quality is definitely degraded as the multipath effect increases. In particular, they show that, if a relative positioning is considered, under low multipath conditions the obtained planimetric accuracy is about 1 m, while under high multipath conditions the planimetric accuracy is degraded to 2 m. In this thesis work some positioning tests were conducted and discussed with the aim of having an assessment of the position quality from Android devices. Similar results to the ones exposed by previous researches in terms of positioning accuracy were found. Some positioning outliers, probably due to the multipath effect, were also observed. Those outliers compromised then the overall solution robustness making GNSS positioning from smartphone not very affordable.
+
+\section{Research Question}
+%
+As mentioned before, the multipath effect is probably the major source of error in urban scenarios affecting the positioning quality.
+A series of tests carried out with smartphones equipped with dual frequency receivers (Broadcom and Snapdragon chipsets) 
+confirmed this hypothesis experimentally. 
+Multipath is also a serious problem for the application 
+of GNSS positioning algorithms that use raw measurements.
+
+Our research question is whether multipath mitigation techniques used for GNSS receivers can be applied to RTK positioning in Android devices. RTK positioning is a class of algorithms that employ correction codes received from base stations.
+They are particularly interesting since they can reach centimetric accuracy without the need of cellular or Internet data.
+More in particular, in this setting our goal is to investigate different types of heuristics to increase robustness, in terms of precision and accuracy, of RTK positioning in Android devices.
+%
+
+\section{Contributions}
+%
+
+\subsection*{A Multipath Mitigation System for Android Smartphones}
+Our first contribution is the design and implementation of a 
+prototype system for applying multipath mitigation heuristics in RTK positioning with GNSS raw measurements.
+The proposed system is based on a pre-processing phase performed in a dedicated Android App (thus working on the edge) and on a real time processing phase, based on a modified version of the open source library RTKLIB, performed on a dedicated server.
+The performance of the resulting system, including client-server latencies, is comparable to RTK positioning procedures for GNSS receivers and Assisted GPS computing procedure. It is important to notice that both other solutions require network communication steps too.
+
+%
+The data acquisition phase performed via an Android App developed during the PhD work is aimed at cleaning, filtering, organizing and delivering the data acquired via the GNSS raw measurements library. The App is in charge of collecting satellites data of a given epoch, namely raw observations of different satellites and frequencies, converting them into a special message format, and sending the resulting message to the processing server.
+The App has several other functionalities including that of receiving and visualizing the position inferred by our algorithms and of providing options to control the acquisition phase, e.g. flags to enable/disable duty cycle and real time plot of SNR parameter.
+
+The server-side processing phase exploits an improved version of the RTKLIB library, enabling RTK positioning from smartphones and increasing the solution robustness by means of multipath mitigation. 
+In order to make RTKLIB working in real time with smartphones, a new API's for processing GNSS data in the format defined for data collection was added to the original library.
+Concerning the multipath mitigation, the so-called MDP (Multipath Detection Parameter) algorithm conceived and patented by Gter, was implemented in the RTKLIB version adopted in this work. This algorithm, performs multipath detection and mitigation in real time for single frequency GNSS receivers.
+During the thesis work the MDP algorithm was improved and adapted for working with GNSS observables from Android devices. The main idea here is to weigh observations of each satellite data with parameters associated to multipath (MDP variable) and signal noise (SNR) error.
+The resulting weights are used to tune the RTKLIB positioning algorithms in order to assign low weights to unreliable observation.
+The algorithm has several possible configuration parameters and operating modes. In particular, one of the biggest improvements of our algorithms is in the adoption of adaptive thresholds that are inferred via statistical analysis of collected data.
+%
+\subsection*{Experimental Validation}
+%
+
+The procedure described above was tested and validated using two different datasets:
+\begin{itemize}
+\item A static acquisition with multipath effect induced
+\item A kinematic acquisition
+\end{itemize}
+For both the case studies several combinations of the MDP algorithm configuration parameters were tested.
+The preliminary results obtained with the proposed application and mitigation algorithm are very interesting.
+More specifically, improvements in positioning accuracy were noted, especially for the period of induced multipath, meaning that the MDP algorithm is suitable for the mitigation of such effect. Furthermore in the solution obtained with the MDP algorithm application some positioning outliers are eliminated, and consequently the solution's robustness is increased. 
+The results obtained are then very promising nevertheless many further tests and processing are needed both for continue validating the obtained results, which shall be supported by a stronger statistics, and for continue improving the MDP algorithm performances. 
+%
+\subsection*{Collected Datasets}
+Finally, a further contribution of our work consists in the creation 
+of large repository of surveys having both GNSS raw measurements from Android smartphones and observables from professional GNSS receivers, in the different scenarios described in detail in the thesis, hence potentially replicable. The datasets will be made available to the research community to foster future collaborations and advancements in the field.
+%
+\section{Plan of the Thesis}
+In the thesis we will focus on the architecture of the proposed solution (Android endpoints and processing server) and on the proposed improvement of the GNSS positioning procedure. In Chapter \ref{ch:gnss} we will give some preliminary notions on GNSS positioning. In Chapter \ref{ch:SoA} we will presents the key points of GNSS raw measurements in Android and of the RTKLIB open source library. In Chapter \ref{ch:quality_analisys} we will describe quality assessment tests performed using dual frequency smartphone and other GNSS receivers. In Chapter \ref{ch:service_devel} we will illustrate the design and implementation of our multipath mitigation systems. In Chapter \ref{ch:mdp_results} we will discuss experimental results obtained via a series of full track surveys. In Chapter \ref{ch:conclusions} we will address some conclusions as well as present and future directions of our work.
+
+
+
+

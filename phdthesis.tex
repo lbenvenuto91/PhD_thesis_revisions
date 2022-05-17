@@ -1,0 +1,215 @@
+\documentclass{disithesis}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[dvips]{graphicx}
+\usepackage{subfigure}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{multirow}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{url} 
+\usepackage{float}
+%\usepackage{biblatex} %Imports biblatex package
+%\usepackage[round]{natbib}
+\usepackage{siunitx}
+\usepackage[bottom]{footmisc} 
+\usepackage{eurosym}
+\usepackage{listings} %Per inserire codice
+\usepackage[usenames]{color} %Per permettere la colorazione dei caratteri 
+\usepackage{bm} %lettere greche in grassetto
+\usepackage{textcomp} %gradi celsius 
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mgreen}{rgb}{0.1,0.6,0.1}
+\definecolor{mpurple}{rgb}{0.3,0,0.4}
+\definecolor{morange}{rgb}{0.9,0.3,0}
+\usepackage{listings}% http://ctan.org/pkg/listings
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage{acronym}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\lstdefinestyle{customc}{
+	belowcaptionskip=1\baselineskip,
+	breaklines=true,
+	%frame=L,
+	xleftmargin=\parindent,
+	language=C,
+	showstringspaces=false,
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\bfseries\color{mgreen},
+	commentstyle=\itshape\color{mpurple},
+	identifierstyle=\color{blue},
+	stringstyle=\color{morange},
+}
+
+\lstdefinestyle{customj}{
+    language=Java,
+    basicstyle=\small\ttfamily, % needed for "
+    %numbers=left,
+    %stepnumber=1,
+    %frame=single,
+    columns=flexible,              % needed because of spaces
+    keepspaces=true,               % needed because of spaces
+    %numberstyle=\tiny\noncopynumber,    % line numbers shouldn't be copied
+    keywordstyle=\color{blue},     % keyword style
+    commentstyle=\color{dkgreen},  % comment style
+    stringstyle=\color{mauve},     % string literal style
+    escapeinside={\%*}{*)},        % if you want to add a comment within your code
+    morekeywords={*,...}           % if you want to add more keywords to the set
+}
+
+\lstset{escapechar=@,style=customc}
+
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+%\addbibresource{bib.bib} %Import the bibliography file
+
+\begin{document}
+	
+%
+
+\title{A Solution for Improving\\ Robustness in GNSS Positioning from\\ Android Devices}
+
+\author{Lorenzo Benvenuto}
+
+%%%% If month and year are not the current ones
+%%%% \submityear{1997}
+%%%% \submitmonth{December}
+
+\technumber{XX}
+
+\maketitle
+
+\begin{addresspage}
+{\bf
+Dottorato di Ricerca in Informatica ed Ingegneria dei Sistemi\\
+Indirizzo Informatica\\
+Dipartimento di Informatica, Bioingegneria, Robotica ed Ingegneria dei Sistemi \\
+Universit\`a degli Studi di Genova\\[2ex]}
+
+DIBRIS, Univ. di Genova\\
+Via Opera Pia, 13\\
+I-16145 Genova, Italy\\
+{\tt http://www.dibris.unige.it/}\\[2ex]
+
+{\bf
+Ph.D. Thesis in Computer Science and Systems Engineering\\
+Computer Science Curriculum}\\
+(S.S.D. INF/01)\\[2ex]
+
+Submitted by Lorenzo Benvenuto\\
+DIBRIS, Univ. di Genova\\
+{\tt ....}\\[2ex]
+
+Date of submission:
+April 2022\\[2ex]
+
+Title:
+A Solution for Improving Robustness of 
+GNSS Positioning from Android Devices\\[2ex]
+
+Advisor: Prof. Giorgio Delzanno (DIBRIS), Eng. Tiziano Cosso (Gter)
+\\
+Dipartimento di Informatica, Bioingegneria, Robotica ed Ingegneria dei Sistemi\\
+Universit\`a di Genova\\
+{\tt ...}\\[2ex]
+
+Ext. Reviewers:\\
+Prof. Paolo Dabove (Politecnico di Torino)\\ Prof. Ferruccio Damiani (Università degli Studi di Torino)
+\end{addresspage}
+
+
+\dedication{ \begin{flushright} \textit{A Giampi: \\l'entusiamo e la passione per il lavoro\\ che mi hai trasmesso durante le giornate \\di rilievo sul campo passate insieme, sono e\\ saranno sempre per me fonte d'ispirazione.} \end{flushright}}
+
+\chapter*{\centering \begin{normalsize}Preface\end{normalsize}}
+\begin{quotation}
+This research work was carried out as part of an industrial PhD in collaboration with Gter srl\footnote{https://www.gter.it/} and the University of Genoa, DIBRIS departement. The PhD lasted three years (from November 2018 to November 2021) and was funded by Regione Liguria on the POR-FSE 2014-2020 programme (Programma Operativo Regione Liguria, Fondo Sociale Europeo). 
+\end{quotation}
+
+
+
+\chapter*{\centering \begin{normalsize}Abstract\end{normalsize}}
+\begin{quotation}
+\noindent
+Starting with the Nougat 7.0 version of the Android Operating System released in 2016,  Google has permitted direct access, via the Android development API, to the GNSS raw measurements on Android-based smartphones. This new feature opened a new research field aimed at developing low-cost applications for satellite-based positioning systems. In particular, after the publication of  a white paper from the European GNSS Agency, many authors started to analyse the quality of the raw measurements retrieved from smartphones and compare them with other types of low cost GNSS devices. The main detected issues turned out to be the low quality of the GNSS observables due to the low quality of the hardware (receiver and antenna) mounted in the smartphones. Nowadays raw GNSS measurements support is mandatory on devices that run Android 10 (API level 29) or higher, but unfortunately the support for some of the raw GNSS measurement fields (e.g. pseudorange rate, ADR, AGC) is optional and can vary based on the type of GNSS chipset installed on the device. Furthermore, not all the smartphones present on the market support double frequency or multi-constellation.
+
+In this thesis we present a solution for improving the robustness of GNSS positioning in Android devices in real time, that combines an acquisition phase performed in a dedicated Android app (thus working on the edge) and a processing phase, based on a modified version of the open source library RTKLIB, performed on dedicated servers. 
+The processing phase performed on the smartphone is aimed at cleaning, filtering, organizing and delivering the data acquired via the GNSS raw data library. 
+The server-side processing phase applies an improved version of the RTK library.
+Our version provides an additional interface for processing different format of GNSS data (in particular a new one defined for GNSS measurement from Android devices) and a method to mitigate in real-time the multipath effect on the collected data. 
+
+We will focus our attention on the architecture of the proposed solution (Android endpoints and processing server), on the proposed improvement of the GNSS positioning procedure, and its implementation in our version of the RTKLIB library, and on preliminary results obtained by the resulting system.
+\end{quotation}
+
+%\begin{citetext}{?}
+%?
+%\end{citetext}
+
+\tableofcontents	
+\listoffigures
+\listoftables
+\input{chapter1_intro}
+\input{chapter1}
+\input{chapter2}
+\input{chapter3}
+\input{chapter4}
+\input{chapter5}
+\input{chapter6}
+%\end{document}
+%\printbibliography %Prints bibliography
+\bibliographystyle{abbrv}
+%\bibliographystyle{unsrt}
+\bibliography{bib}
+\appendix
+\chapter{Android App in Java}\label{appendix:androidcode}
+In this appendix part of the code of the second release of the Android App developed for GNSS data acquisition from smartphones is shown. 
+\\
+\lstinputlisting[style=customj]{app.java}
+
+\chapter{RTKLIB Modified code}\label{appendix:mrtklib_andr}
+In this appendix the modified part of RTKLIB developed for reading GNSS data from Android devices is shown. This code should be saved in a file in /RTKLIB/src/rcv.
+\\
+\lstinputlisting[language=C,style=customc]{gterAndroid.c}
+
+\begin{acknowledgements}
+Questo mio percorso di Dottorato che sta volgendo al termine è stato sicuramente complicato ma allo stesso tempo per me molto formativo e stimolante. Ci sono molte persone che è doveroso ringraziare, senza le quali non sarei mai riuscito a completare gli studi e la stesura di questa tesi. Innanzitutto desidero ringraziare i miei due relatori Giorgio Delzanno e Tiziano Cosso per avermi seguito e messo a disposizione gli strumenti necessari per realizzare questo lavoro. Un particolare ringraziamento va inoltre a Davide Curone e a Mattia Dellepiane per avermi aiutato nello sviluppo del codice presentato in questo lavoro, e per la pazienza che hanno sempre avuto nei miei confronti: le competenze di programmazione che siete riusciti a trasmettermi mi saranno certamente utili per il resto della mia vita professionale.\\
+Ringrazio inoltre tutto lo staff di Gter. Passare questi tre anni in azienda mi ha permesso di crescere professionalmente e di affrontare tutte le dinamiche del mondo del lavoro, pur non abbandonando l'ambiente accademico e la ricerca. Grazie per avermi accolto e avermi fatto sentire parte del team: l'esperienza che ho accumulato in questi anni mi ha fatto crescere sia professionalmente sia come persona. \\
+Sono inoltre molto grato al DIBRIS per tutto il supporto accademico ricevuto e per avermi concesso di partecipare a conferenze e summerschool in ambito GNSS. In queste occasioni ho avuto l'opportunità di seguire lezioni da personalità illustri del settore e di conoscere molti altri dottorandi e giovani ricercatori con i quali ho avuto modo di confrontarmi ed con i quali instaurato rapporti di amicizia. Tutto questo ha contribuito ad aumentare notevolmente il mio bagaglio culturale, e ad approfondire notevolmente le mie competenze in ambito GNSS.
+
+Non posso non ringraziare la mia ragazza Marta per avermi sostenuto sempre, soprattutto nei momenti difficili, quando qualsiasi cosa sembrava impossibile e quando non credevo di poter seriamente raggiungere questo traguardo. Il tuo sostegno costante, giorno dopo giorno, mi ha dato la forza di affrontare e risolvere tutti i problemi e di arrivare in fondo a questo percorso: grazie davvero, ti sarò sempre infinitamente grato per tutto questo! 
+
+Grazie alla mia famiglia e a mia sorella Elisa, che seppur distante, sento sempre molto vicina. Grazie per sostenermi in tutte le mie scelte ed esser sempre stati dalla mia parte. So di poter contare sempre su di voi e il vostro continuo sostegno è per me determinante.
+
+Infine, ma certamente non ultimi per importanza, grazie agli amici di sempre, in particolare Fabio e Gianluca. Avere degli amici come voi è una fortuna che non credo tutti abbiano, e io in tal senso mi ritengo davvero fortunato: grazie di cuore ragazzi!
+
+\end{acknowledgements}
+
+\end{document}
+
